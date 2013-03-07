@@ -104,5 +104,5 @@ class Hand(object):
         return self.get_highest_kind()
 
     def __gt__(self, hand1, hand2):
-        pass
+        return hand1.get_strength() > hand2.get_strength()
 
