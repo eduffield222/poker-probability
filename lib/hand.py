@@ -6,19 +6,26 @@ class Hand(object):
     def __init__(self, community_cards):
         self._cards = []
         self._community_cards = community_cards
+        self._all_cards = []
+
+        for card in community_cards:
+            self._all_cards.append(card)
 
     def add(self, card):
         self._cards.append(card)
+        self._all_cards.append(card)
+
+    def add_community_card(self, card):
+        self._community_cards.append(card)
+        self._all_cards.append(card)
 
     def is_flush(self):
-        all_cards = self._cards
-        all_cards.extend(self._community_cards)
-
         for suit in ('h', 's', 'd', 'c'):
             count = 0
 
-            for i in xrange(len(all_cards)):
-                if self._cards[i].suit == suit: count += 1
+            for i in xrange(len(self._all_cards)):
+                if self._all_cards[i].suit == suit:
+                    count += 1
 
             if count == 5:
                 return True
@@ -26,10 +33,6 @@ class Hand(object):
         return False
 
     def is_straight(self):
-        all_cards = []
-        all_cards = self._cards
-        all_cards.extend(self._community_cards)
-
         combos = []
         combos.append(['A', '2', '3', '4', '5'])
         combos.append(['2', '3', '4', '5', '6'])
@@ -46,7 +49,7 @@ class Hand(object):
             all_preset = True
             for card1 in combo:
                 found = False
-                for card2 in all_cards:
+                for card2 in self._all_cards:
                     if card1 == card2.kind:
                         found = True
                 if not found: all_preset = False
@@ -65,14 +68,12 @@ class Hand(object):
         return self.of_a_kind(2)
 
     def of_a_kind(self, needed_count):
-        all_cards = self._cards
-        all_cards.extend(self._community_cards)
-
-        for kind in ('2', '3', '4', '5',  '6',  '7',  '8',  '9',  'T',  'J',  'Q',  'K',  'A'):
+        for kind in ('2'): #, '3', '4', '5',  '6',  '7',  '8',  '9',  'T',  'J',  'Q',  'K',  'A'):
             count = 0
 
-            for card in all_cards:
-                if card.kind == kind: count += 1
+            for card in self._all_cards:
+               if card.kind == kind:
+                    count += 1
 
             if count == needed_count:
                 return True
@@ -114,10 +115,8 @@ class Hand(object):
         return "None"
 
     def display_cards(self):
-        print "----- CARDS ----"
-        all_cards = self._cards
-        all_cards.extend(self._community_cards)
-        for card in all_cards:
+        print "--------- CARDS -------------"
+        for card in self._all_cards:
             print card.kind, card.suit
 
     def __gt__(self, hand1, hand2):

@@ -14,16 +14,16 @@ start = time()
 c = 0
 for i in xrange(10000):
     deck.get_new_deck()
+
     community_cards = []
+    community_cards.append (deck.deal())
+    community_cards.append (deck.deal())
+    community_cards.append (deck.deal())
+    community_cards.append (deck.deal())
+
     my_hand = Hand(community_cards)
-
     my_hand.add (deck.deal())
     my_hand.add (deck.deal())
-
-    community_cards.append (deck.deal())
-    community_cards.append (deck.deal())
-    community_cards.append (deck.deal())
-    community_cards.append (deck.deal())
 
     print my_hand.display_cards()
     print "IS FOUR OF A KIND", my_hand.four_of_a_kind()
