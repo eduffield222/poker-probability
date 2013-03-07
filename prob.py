@@ -11,11 +11,18 @@ from hand import Hand
 deck = Deck()
 
 start = time()
-c = 0
-for i in xrange(10000):
+total = 10000.0
+count_straights = 0
+count_flushes = 0
+count_four_of_a_kind = 0
+count_three_of_a_kind = 0
+count_one_pair = 0
+
+for i in xrange(int(total)):
     deck.get_new_deck()
 
     community_cards = []
+    community_cards.append (deck.deal())
     community_cards.append (deck.deal())
     community_cards.append (deck.deal())
     community_cards.append (deck.deal())
@@ -25,15 +32,21 @@ for i in xrange(10000):
     my_hand.add (deck.deal())
     my_hand.add (deck.deal())
 
-    print my_hand.display_cards()
-    print "IS FOUR OF A KIND", my_hand.four_of_a_kind()
-    print "IS THREE OF A KIND", my_hand.three_of_a_kind()
-    print "IS FLUSH", my_hand.is_flush()
-    print "IS STRAIGHT", my_hand.is_straight()
-    #if my_hand.is_flush(): c += 1
-    #if my_hand.is_straight(): c += 1
+    #print my_hand.display_cards()
+    #print "IS FOUR OF A KIND", my_hand.four_of_a_kind()
+    #print "IS THREE OF A KIND", my_hand.three_of_a_kind()
+    #print "IS FLUSH", my_hand.is_flush()
+    #print "IS STRAIGHT", my_hand.is_straight()
+
+    if my_hand.is_flush(): count_flushes += 1.0
+    if my_hand.is_straight(): count_straights += 1.0
+    if my_hand.three_of_a_kind(): count_three_of_a_kind += 1.0
+    if my_hand.one_pair(): count_one_pair += 1.0
 
 print "took", time() - start
-print "count", c
+print "count flush", count_flushes / total
+print "count straight", count_straights / total
+print "count three_of_a_kind", count_three_of_a_kind / total
+print "count one pair", count_one_pair / total
 
 

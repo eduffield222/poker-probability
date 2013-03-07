@@ -68,7 +68,7 @@ class Hand(object):
         return self.of_a_kind(2)
 
     def of_a_kind(self, needed_count):
-        for kind in ('2'): #, '3', '4', '5',  '6',  '7',  '8',  '9',  'T',  'J',  'Q',  'K',  'A'):
+        for kind in ('2', '3', '4', '5',  '6',  '7',  '8',  '9',  'T',  'J',  'Q',  'K',  'A'):
             count = 0
 
             for card in self._all_cards:
