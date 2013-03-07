@@ -11,7 +11,7 @@ from re import split
 
 deck = Deck()
 
-cards = raw_input("Enter your cards (7c As): ")
+cards =  raw_input("Enter your cards (7c As): ")
 community = raw_input("Enter first 3 community cards (3s As Ts): ")
 
 cards_split = split(' ', cards)

@@ -23,11 +23,11 @@ class Hand(object):
         for suit in ('h', 's', 'd', 'c'):
             count = 0
 
-            for i in xrange(len(self._all_cards)):
-                if self._all_cards[i].suit == suit:
+            for card in self._all_cards:
+                if card.suit == suit:
                     count += 1
 
-            if count == 5:
+            if count >= 5:
                 return True
 
         return False
