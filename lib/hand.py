@@ -71,8 +71,8 @@ class Hand(object):
         for kind in ('2', '3', '4', '5',  '6',  '7',  '8',  '9',  'T',  'J',  'Q',  'K',  'A'):
             count = 0
 
-            for i in xrange(len(all_cards)):
-                if self._cards[i].kind == kind: count += 1
+            for card in all_cards:
+                if card.kind == kind: count += 1
 
             if count == needed_count:
                 return True
@@ -86,8 +86,8 @@ class Hand(object):
         count_kind = 0
         for kind in ('2', '3', '4', '5',  '6',  '7',  '8',  '9',  'T',  'J',  'Q',  'K',  'A'):
             count_kind += 1
-            for i in xrange(len(all_cards)):
-                if self._cards[i].kind == kind:
+            for card in all_cards:
+                if card.kind == kind:
                     highest_kind = count_kind
 
         return highest_kind
@@ -102,6 +102,23 @@ class Hand(object):
         if self.three_of_a_kind(): return 40 + self.get_highest_kind()
         if self.one_pair(): return 20 + self.get_highest_kind()
         return self.get_highest_kind()
+
+    def get_hand_name(self):
+        if self.is_straight() and self.is_flush: return "Straight flush"
+        if self.four_of_a_kind(): return "Four of a kind"
+        if self.three_of_a_kind() and self.one_pair(): return "Three of a kind"
+        if self.is_flush(): return "Flush"
+        if self.is_straight(): return "Straight"
+        if self.three_of_a_kind(): return "Three of a kind"
+        if self.one_pair(): return "One Pair"
+        return "None"
+
+    def display_cards(self):
+        print "----- CARDS ----"
+        all_cards = self._cards
+        all_cards.extend(self._community_cards)
+        for card in all_cards:
+            print card.kind, card.suit
 
     def __gt__(self, hand1, hand2):
         return hand1.get_strength() > hand2.get_strength()

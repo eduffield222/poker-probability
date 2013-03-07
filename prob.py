@@ -25,7 +25,11 @@ for i in xrange(10000):
     community_cards.append (deck.deal())
     community_cards.append (deck.deal())
 
-    print my_hand.get_strength()
+    print my_hand.display_cards()
+    print "IS FOUR OF A KIND", my_hand.four_of_a_kind()
+    print "IS THREE OF A KIND", my_hand.three_of_a_kind()
+    print "IS FLUSH", my_hand.is_flush()
+    print "IS STRAIGHT", my_hand.is_straight()
     #if my_hand.is_flush(): c += 1
     #if my_hand.is_straight(): c += 1
 
