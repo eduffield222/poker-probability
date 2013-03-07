@@ -23,8 +23,10 @@ for i in xrange(10000):
     community_cards.append (deck.deal())
     community_cards.append (deck.deal())
     community_cards.append (deck.deal())
+    community_cards.append (deck.deal())
 
-    if my_hand.is_flush(): c += 1
+    print my_hand.get_strength()
+    #if my_hand.is_flush(): c += 1
     #if my_hand.is_straight(): c += 1
 
 print "took", time() - start

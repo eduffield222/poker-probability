@@ -42,38 +42,66 @@ class Hand(object):
         combos.append(['9', 'T', 'J', 'Q', 'K'])
         combos.append(['T', 'J', 'Q', 'K', 'A'])
 
-
-        print all_cards
-        return False
-
         for combo in combos:
             all_preset = True
             for card1 in combo:
                 found = False
-                print "----------------"
-                print all_cards
                 for card2 in all_cards:
-                    print card1, card2.name
-                #    if card1 == card2.name:
-                #        found = True
-                #if not found: all_preset = False
+                    if card1 == card2.kind:
+                        found = True
+                if not found: all_preset = False
             if all_preset:
                 return True
 
         return False
 
+    def four_of_a_kind(self):
+        return self.of_a_kind(4)
+
+    def three_of_a_kind(self):
+        return self.of_a_kind(3)
+
+    def one_pair(self):
+        return self.of_a_kind(2)
+
+    def of_a_kind(self, needed_count):
+        all_cards = self._cards
+        all_cards.extend(self._community_cards)
+
+        for kind in ('2', '3', '4', '5',  '6',  '7',  '8',  '9',  'T',  'J',  'Q',  'K',  'A'):
+            count = 0
+
+            for i in xrange(len(all_cards)):
+                if self._cards[i].kind == kind: count += 1
+
+            if count == needed_count:
+                return True
+
+        return False
+
+    def get_highest_kind(self):
+        all_cards = self._cards
+
+        highest_kind = 0
+        count_kind = 0
+        for kind in ('2', '3', '4', '5',  '6',  '7',  '8',  '9',  'T',  'J',  'Q',  'K',  'A'):
+            count_kind += 1
+            for i in xrange(len(all_cards)):
+                if self._cards[i].kind == kind:
+                    highest_kind = count_kind
+
+        return highest_kind
 
     def get_strength(self):
         #royal flush 90
-        if self.is_straight() and self.is_flush: return 80
-        if self.four_of_a_kind(): return 70
-        #full house 60
-        if self.is_flush(): return 50
-        if self.is_straight(): return 40
-        if self.three_of_a_kind(): return 30
-        if self.two_pair(): return 20
-        if self.one_pair(): return 10
-        #highest card value
+        if self.is_straight() and self.is_flush: return 120 + self.get_highest_kind()
+        if self.four_of_a_kind(): return 100 + self.get_highest_kind()
+        if self.three_of_a_kind() and self.one_pair(): return 80 + self.get_highest_kind() #full house
+        if self.is_flush(): return 80 + self.get_highest_kind()
+        if self.is_straight(): return 60 + self.get_highest_kind()
+        if self.three_of_a_kind(): return 40 + self.get_highest_kind()
+        if self.one_pair(): return 20 + self.get_highest_kind()
+        return self.get_highest_kind()
 
     def __gt__(self, hand1, hand2):
         pass
