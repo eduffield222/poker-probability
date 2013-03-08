@@ -20,7 +20,7 @@ class Hand(object):
         self._all_cards.append(card)
 
     def is_flush(self):
-        for suit in ('h', 's', 'd', 'c'):
+        for suit in ('H', 'S', 'D', 'C'):
             count = 0
 
             for card in self._all_cards:

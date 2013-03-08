@@ -20,22 +20,22 @@ community_cards5 = None
 for stage in range(1, 5):
 
     if stage == 1:
-        cards = raw_input("Enter your cards (7c As): ")
+        cards = raw_input("Enter your cards (7c As): ").upper()
         cards_split = split(' ', cards)
         my_cards1 = Card(cards_split[0][0], cards_split[0][1])
         my_cards2 = Card(cards_split[1][0], cards_split[1][1])
     if stage == 2:
-        community = raw_input("Enter first 3 community cards (3s As Ts): ")
+        community = raw_input("Enter first 3 community cards (3s As Ts): ").upper()
         community_split = split(' ', community)
         community_cards1 = Card(community_split[0][0], community_split[0][1])
         community_cards2 = Card(community_split[1][0], community_split[1][1])
         community_cards3 = Card(community_split[2][0], community_split[2][1])
     if stage == 3:
-        community = raw_input("Enter next community card (As): ")
+        community = raw_input("Enter next community card (As): ").upper()
         community_split = split(' ', community)
         community_cards4 = Card(community_split[0][0], community_split[0][1])
     if stage == 4:
-        community = raw_input("Enter next community card (As): ")
+        community = raw_input("Enter next community card (As): ").upper()
         community_split = split(' ', community)
         community_cards5 = Card(community_split[0][0], community_split[0][1])
 

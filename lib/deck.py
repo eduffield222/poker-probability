@@ -10,7 +10,7 @@ class Deck(object):
     def get_new_deck(self):
         self._cards = []
         for name in ('2', '3', '4', '5',  '6',  '7',  '8',  '9',  'T',  'J',  'Q',  'K',  'A'):
-            for suit in ('h', 's', 'd', 'c'):
+            for suit in ('H', 'S', 'D', 'C'):
                 self._cards.append(Card(name, suit))
 
     def deal(self):

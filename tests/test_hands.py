@@ -18,15 +18,15 @@ class TestHands(unittest.TestCase):
         deck.get_new_deck()
 
         community_cards = []
-        community_cards.append (Card('T', 's'))
-        community_cards.append (Card('3', 's'))
-        community_cards.append (Card('8', 's'))
+        community_cards.append (Card('T', 'S'))
+        community_cards.append (Card('3', 'S'))
+        community_cards.append (Card('8', 'S'))
         community_cards.append (deck.deal())
         community_cards.append (deck.deal())
 
         my_hand = Hand(community_cards)
-        my_hand.add (Card('2', 's'))
-        my_hand.add (Card('4', 's'))
+        my_hand.add (Card('2', 'S'))
+        my_hand.add (Card('4', 'S'))
 
         assert my_hand.is_flush()
 
@@ -37,13 +37,13 @@ class TestHands(unittest.TestCase):
         community_cards = []
         community_cards.append (deck.deal())
         community_cards.append (deck.deal())
-        community_cards.append (Card('2', 'd'))
-        community_cards.append (Card('3', 'd'))
-        community_cards.append (Card('4', 'd'))
+        community_cards.append (Card('2', 'D'))
+        community_cards.append (Card('3', 'D'))
+        community_cards.append (Card('4', 'D'))
 
         my_hand = Hand(community_cards)
-        my_hand.add (Card('T', 'd'))
-        my_hand.add (Card('J', 'd'))
+        my_hand.add (Card('T', 'D'))
+        my_hand.add (Card('J', 'D'))
 
         assert my_hand.is_flush()
 
@@ -54,13 +54,13 @@ class TestHands(unittest.TestCase):
         community_cards = []
         community_cards.append (deck.deal())
         community_cards.append (deck.deal())
-        community_cards.append (Card('2', 'd'))
-        community_cards.append (Card('3', 's'))
-        community_cards.append (Card('4', 's'))
+        community_cards.append (Card('2', 'D'))
+        community_cards.append (Card('3', 'S'))
+        community_cards.append (Card('4', 'S'))
 
         my_hand = Hand(community_cards)
-        my_hand.add (Card('5', 'd'))
-        my_hand.add (Card('6', 'd'))
+        my_hand.add (Card('5', 'D'))
+        my_hand.add (Card('6', 'D'))
 
         assert my_hand.is_straight()
 
@@ -71,13 +71,13 @@ class TestHands(unittest.TestCase):
         community_cards = []
         community_cards.append (deck.deal())
         community_cards.append (deck.deal())
-        community_cards.append (Card('2', 'd'))
-        community_cards.append (Card('3', 'd'))
-        community_cards.append (Card('4', 'd'))
+        community_cards.append (Card('2', 'D'))
+        community_cards.append (Card('3', 'D'))
+        community_cards.append (Card('4', 'D'))
 
         my_hand = Hand(community_cards)
-        my_hand.add (Card('5', 'd'))
-        my_hand.add (Card('6', 'd'))
+        my_hand.add (Card('5', 'D'))
+        my_hand.add (Card('6', 'D'))
 
         assert my_hand.is_straight() and my_hand.is_flush()
 
@@ -86,13 +86,13 @@ class TestHands(unittest.TestCase):
         deck.get_new_deck()
 
         community_cards = []
-        community_cards.append (Card('2', 'd'))
-        community_cards.append (Card('3', 'd'))
-        community_cards.append (Card('4', 'd'))
+        community_cards.append (Card('2', 'D'))
+        community_cards.append (Card('3', 'D'))
+        community_cards.append (Card('4', 'D'))
 
         my_hand = Hand(community_cards)
-        my_hand.add (Card('2', 's'))
-        my_hand.add (Card('6', 'd'))
+        my_hand.add (Card('2', 'S'))
+        my_hand.add (Card('6', 'D'))
 
         assert my_hand.one_pair() and not my_hand.is_flush()
 
@@ -101,13 +101,13 @@ class TestHands(unittest.TestCase):
         deck.get_new_deck()
 
         community_cards = []
-        community_cards.append (Card('2', 'd'))
-        community_cards.append (Card('2', 'c'))
-        community_cards.append (Card('4', 'd'))
+        community_cards.append (Card('2', 'D'))
+        community_cards.append (Card('2', 'C'))
+        community_cards.append (Card('4', 'D'))
 
         my_hand = Hand(community_cards)
-        my_hand.add (Card('2', 's'))
-        my_hand.add (Card('6', 'd'))
+        my_hand.add (Card('2', 'S'))
+        my_hand.add (Card('6', 'D'))
 
         assert my_hand.three_of_a_kind() and not my_hand.one_pair()
 
@@ -116,13 +116,13 @@ class TestHands(unittest.TestCase):
         deck.get_new_deck()
 
         community_cards = []
-        community_cards.append (Card('2', 'd'))
-        community_cards.append (Card('2', 'c'))
-        community_cards.append (Card('6', 'd'))
+        community_cards.append (Card('2', 'D'))
+        community_cards.append (Card('2', 'C'))
+        community_cards.append (Card('6', 'D'))
 
         my_hand = Hand(community_cards)
-        my_hand.add (Card('2', 's'))
-        my_hand.add (Card('6', 'd'))
+        my_hand.add (Card('2', 'S'))
+        my_hand.add (Card('6', 'D'))
 
         assert my_hand.three_of_a_kind() and my_hand.one_pair()
 
