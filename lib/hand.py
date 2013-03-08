@@ -116,6 +116,7 @@ class Hand(object):
 
     def display_cards(self):
         print "--------- CARDS -------------"
+        print len(self._all_cards)
         for card in self._all_cards:
             print card.kind, card.suit
 
