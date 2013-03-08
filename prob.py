@@ -48,6 +48,7 @@ for stage in range(1, 5):
     count_my_four_of_a_kind = 0
     count_my_three_of_a_kind = 0
     count_my_one_pair = 0
+    count_my_hand_strength = 0
     deck = Deck()
 
     for i in xrange(int(total)):
@@ -66,14 +67,17 @@ for stage in range(1, 5):
 
         if my_hand.is_flush(): count_my_flushes += 1.0
         if my_hand.is_straight(): count_my_straights += 1.0
+        if my_hand.four_of_a_kind(): count_my_four_of_a_kind += 1.0
         if my_hand.three_of_a_kind(): count_my_three_of_a_kind += 1.0
         if my_hand.one_pair(): count_my_one_pair += 1.0
+        count_my_hand_strength += my_hand.get_strength()
 
     count_their_straights = 0
     count_their_flushes = 0
     count_their_four_of_a_kind = 0
     count_their_three_of_a_kind = 0
     count_their_one_pair = 0
+    count_their_hand_strength = 0
     deck = Deck()
 
     for i in xrange(int(total)):
@@ -92,14 +96,47 @@ for stage in range(1, 5):
 
         if my_hand.is_flush(): count_their_flushes += 1.0
         if my_hand.is_straight(): count_their_straights += 1.0
+        if my_hand.four_of_a_kind(): count_their_four_of_a_kind += 1.0
         if my_hand.three_of_a_kind(): count_their_three_of_a_kind += 1.0
         if my_hand.one_pair(): count_their_one_pair += 1.0
+        count_their_hand_strength += my_hand.get_strength()
 
     print "---------------------------------------------"
     print "took", time() - start
     print "PROBABILITY             YOU   ", "THEM", "RATIO"
-    print "count flush          ", round(count_my_flushes / total, 4)        , round(count_their_flushes / total, 4), round( (count_my_flushes / total) / (count_their_flushes / total), 4)
-    print "count straight       ", round(count_my_straights / total, 4)      , round(count_their_straights / total, 4), round( (count_my_straights / total) / (count_their_straights / total), 4)
-    print "count three_of_a_kind", round(count_my_three_of_a_kind / total, 4), round(count_their_three_of_a_kind / total, 4), round( (count_my_three_of_a_kind / total) / (count_their_three_of_a_kind / total), 4)
-    print "count one pair       ", round(count_my_one_pair / total, 4)       , round(count_their_one_pair / total, 4), round( (count_my_one_pair / total) / (count_their_one_pair / total), 4)
 
+    ratio_flush, ratio_straight, ratio_four_of_a_kind, ratio_three_of_a_kind = 1,1,1,1
+
+    try:
+        my_flush = round(count_my_flushes / total, 4)
+        their_flush = round(count_their_flushes / total, 4)
+        ratio_flush = my_flush / their_flush
+        print "count flush          ", my_flush, their_flush, ratio_flush
+    except:
+        raise
+
+    try:
+        my_straight = round(count_my_straights / total, 4)
+        their_straight = round(count_their_straights / total, 4)
+        ratio_straight = my_straight / their_straight
+        print "count straight          ", my_straight, their_straight, ratio_straight
+    except:
+        raise
+
+    try:
+        my_four_of_a_kind = round(count_my_four_of_a_kind / total, 4)
+        their_four_of_a_kind = round(count_their_four_of_a_kind / total, 4)
+        ratio_four_of_a_kind = my_four_of_a_kind / their_four_of_a_kind
+        print "count four_of_a_kind          ", my_four_of_a_kind, their_four_of_a_kind, ratio_four_of_a_kind
+    except:
+        raise
+
+    try:
+        my_three_of_a_kind = round(count_my_three_of_a_kind / total, 4)
+        their_three_of_a_kind = round(count_their_three_of_a_kind / total, 4)
+        ratio_three_of_a_kind = my_three_of_a_kind / their_three_of_a_kind
+        print "count three_of_a_kind          ", my_three_of_a_kind, their_three_of_a_kind, ratio_three_of_a_kind
+    except:
+        raise
+
+    print "TOTAL HAND STRENGTH", count_my_hand_strength, count_their_hand_strength, round(float(count_my_hand_strength) / float(count_their_hand_strength), 4)
